@@ -1,9 +1,14 @@
 ---
 title: 初识Hexo
-updated: 2019-08-27 10:00:10
+abbrlink: 97bd5563
+date: 2019-08-28
 tags:
+  - hexo
+  - 语法
+categories: 基础
 ---
-
+hexo的学习历程。
+<!-- more  -->
 最近在学习利用hexo来搭建个人博客，把学习过程中遇到的问题以及学习到的语法进行来总结，希望可以帮到其他小伙伴们。
 
 hexo的语法大多数和markdown语法都一样，不过也有个别比较特殊的存在。
@@ -87,8 +92,3 @@ content
 {% link
 text http://localhost:4000/sugarZ/2019/08/27/first-realize/
 %}
-
-#### Link
-{% raw %}
-content
-{% endraw %}

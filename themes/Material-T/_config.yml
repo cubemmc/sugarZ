@@ -10,7 +10,7 @@
 # Site
 #---------------------------
 favicon: /img/favicon.png
-apple_touch_icon: /img/apple-touch-icon.png
+apple_touch_icon: ./img/apple-touch-icon.png
 title_join_string: ' ~ '  # 浏览器标签页中的标题分隔符，效果： 文章名 ~ 站点名
 highlight:
   enable: true
@@ -73,7 +73,7 @@ footer:
 # Index Page
 #---------------------------
 index:
-  banner_img: /img/index.jpg
+  banner_img: ./img/index.jpg
   banner_img_height: 100  # available: 0 - 100
   slogan:  # 首页副标题的独立设置
     enable: true  # 为 false 则不显示任何内容
@@ -90,7 +90,7 @@ index:
 # Post Page
 #---------------------------
 post: 
-  banner_img: /img/post.jpg
+  banner_img: ./img/post.jpg
   banner_img_height: 70  # available: 0 - 100
   date_format: "dddd, MMMM Do YYYY, h:mm a"
   toc: 
@@ -160,7 +160,7 @@ valine:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: /img/archive.jpg
+  banner_img: ./img/archive.jpg
   banner_img_height: 80  # available: 0 - 100
 
 
@@ -169,7 +169,7 @@ archive:
 # Categories Page
 #---------------------------
 category:
-  banner_img: /img/archive.jpg
+  banner_img: ./img/archive.jpg
   banner_img_height: 80  # available: 0 - 100
 
 
@@ -178,7 +178,7 @@ category:
 # Tags Page
 #---------------------------
 tag:
-  banner_img: /img/archive.jpg
+  banner_img: ./img/archive.jpg
   banner_img_height: 80  # available: 0 - 100
   tagcloud: # 标签云
     min_font: 15
@@ -193,9 +193,9 @@ tag:
 # About Page
 #---------------------------
 about:  # 以下仅为页面顶部的基本信息，更多内容请在 /Material-T/pages/about.md 中编辑，支持 markdown 和 HTML
-  banner_img: /img/about.jpg
+  banner_img: ./img/about.jpg
   banner_img_height: 80  # available: 0 - 100
-  avatar: /img/avatar.png # 头像
+  avatar: ./img/avatar.png # 头像
   name: myname
   introduce: info / info / info # 支持 HTML
   icons: # 更多图标可从 https://fontawesome.com/icons 查找，并以 "图标名: url" 的格式添加在下方
@@ -208,6 +208,6 @@ about:  # 以下仅为页面顶部的基本信息，更多内容请在 /Material
 # 404 Page
 #---------------------------
 page404:
-  banner_img: /img/index.jpg
+  banner_img: ./img/index.jpg
   banner_img_height: 80  # available: 0 - 100
   subtitle: 'Page not found'
