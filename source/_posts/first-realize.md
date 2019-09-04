@@ -7,16 +7,16 @@ tags:
   - 语法
 categories: 基础
 ---
-hexo的学习历程。
+hexo的学习历程中，学习到的hexo语法以及一些技巧。
 <!-- more  -->
 最近在学习利用hexo来搭建个人博客，把学习过程中遇到的问题以及学习到的语法进行来总结，希望可以帮到其他小伙伴们。
 
-hexo的语法大多数和markdown语法都一样，不过也有个别比较特殊的存在。
+最基础的就是hexo的语法，大多数语法和markdown一样，不过hexo也有它独有的一些语法需要我们学习。
 
-### 1、标签插件 - 引用块和代码块的使用
-标签插件估计是最常用的一个语法，它是用于在文章中快速插入特定内容的插件。跟markdown语法中类似，就是引入引用块或者代码块，突出或者高亮显示某部分内容。
+### 标签插件
+标签插件估计是最常用的一个语法，它是用于在文章中快速插入特定内容的插件，跟markdown语法中类似。
 
-#### 引用块
+#### 引用块 - blockquote/endblockquote
 语法如下：
 ```
 {% blockquote [作者[, 其他资源信息]] [链接] [链接标题] %}
@@ -35,7 +35,7 @@ hexo的语法大多数和markdown语法都一样，不过也有个别比较特�
 展示内容
 {% endblockquote %}
 
-#### 代码块
+#### 代码块 - codeblock/endcodeblock
 语法如下：
 ```
 {% codeblock [标题] [lang:language] [链接] [链接title] %}
@@ -48,12 +48,6 @@ code snippet
 ```
 
 示例：
-```
-{% codeblock [标题] [lang:language] [链接] [链接title] %}
-alert('Hello World!')
-{% endcodeblock %}
-```
-
 {% codeblock %}
 alert('Hello World!')
 {% endcodeblock %}
@@ -71,8 +65,8 @@ content
 content
 {% endpullquote %}
 
-#### Image
-在文章中插入指定宽高的图片，语法：
+#### 插入图片 - Image
+在文章中插入图片，可自定义图片宽高，语法：
 ```
 {% img [class names] /path/to/image [width] [height] "title text 'alt text'" %}
 ```
@@ -80,7 +74,7 @@ content
 示例：
 {% img /path/to/image 100 20 "ceshi" %}
 
-#### Link
+#### 文章中插入链接 - Link
 在文章中插入链接，并自动给外部链接添加```target="_blank"```属性，语法：
 ```
 {% link
@@ -92,3 +86,6 @@ content
 {% link
 text http://localhost:4000/sugarZ/2019/08/27/first-realize/
 %}
+
+#### 实现段落文本缩进
+可以在需要缩进的段落文本前添加```&nbsp;&nbsp;&nbsp;```，来实现段落文本的缩进。每一个```&nbsp;```代表一个空格的距离。
