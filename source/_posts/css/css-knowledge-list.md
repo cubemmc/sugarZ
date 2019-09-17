@@ -11,7 +11,7 @@ categories: css
 本文章总结了一些常用或者不常用的css技巧知识，并且将会持续更新。
 
 #### 图片点击穿透
-&nbsp;&nbsp;&nbsp;一张图片覆盖在了另一张图片上，需要穿透上面的图片，实现底层图片的点击事件，可以在上层图片的样式中添加样式`pointer-events: none;`,可以实现这个效果。该css属性在大多数浏览器下都可用，通用性比较强，具体可参考下图（图片资源来源于[canIuse网站查询](https://www.caniuse.com/#search=pointer-events)）：
+&nbsp;&nbsp;&nbsp;一张图片覆盖在了另一张图片上，需要穿透上面的图片，实现底层图片的点击事件，可以在上层图片的样式中添加样式`pointer-events: none;`,可以实现这个效果。该css属性在大多数浏览器下都可用，通用性比较强，具体可参考下图（图片来源于[canIuse网站查询](https://www.caniuse.com/#search=pointer-events)）：
 {% img /img/pointer_events_use.jpg "pointer-events可用浏览器" %}
 
 #### 英文单词换行
