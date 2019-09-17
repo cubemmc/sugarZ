@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>sugarZ的博客</title>
+  <icon>https://www.gravatar.com/avatar/a889d1f0756c82b6868b5118061683ae</icon>
+  
+  <link href="/sugarZ/atom.xml" rel="self"/>
+  
+  <link href="https://cubemmc.github.io/sugarZ/"/>
+  <updated>2019-09-17T07:52:59.516Z</updated>
+  <id>https://cubemmc.github.io/sugarZ/</id>
+  
+  <author>
+    <name>sugarZ</name>
+    <email>2625360443@qq.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS中对于时间以及时间戳的各种操作</title>
+    <link href="https://cubemmc.github.io/sugarZ//posts/6f949845/"/>
+    <id>https://cubemmc.github.io/sugarZ//posts/6f949845/</id>
+    <published>2019-09-16T16:00:00.000Z</published>
+    <updated>2019-09-17T07:52:59.516Z</updated>
+    
+    <content type="html"><![CDATA[<p>项目开发中，有时需要将服务端返回的时间数据格式化，服务端返回的时间格式不同，前端对时间的操作方法也不一样。<br>以下是我在项目开发中遇到的一些对时间进行相关操作的总结。</p><a id="more"></a><h4 id="时间戳-gt-当前时间"><a href="#时间戳-gt-当前时间" class="headerlink" title="时间戳 -> 当前时间"></a>时间戳 -&gt; 当前时间</h4><p>时间戳 -&gt; 当前时间(形如’2018-12-28 17:41:22’)</p><blockquote><p>时间戳为10位(精确到秒)，需*1000；<br>时间戳为13位(精确到毫秒)，无需乘1000。</p></blockquote><p>假设前端同学获取到的时间戳是<code>let time = 1545990082242</code>，<br>然后调用函数<code>toTimeDate(time)</code>，返回当前时间。<br>toTimeDate 函数具体实现方法如下：</p><pre><code>let time = 1545990082242;console.log(toTimeDate(time)); // 输出 2018-12-28 17:41:22function toTimeDate(timetamp) {  var date = new Date(timetamp); // 输出 date=Fri Dec 28 2018 17:41:22 GMT+0800 (中国标准时间)  var year = date.getFullYear(); // 输出年 2018  var month = date.getMonth()+1; // 输出月 12  var dates = date.getDate(); // 输出日 28  var hour = date.getHours(); // 输出时 17  var minute = date.getMinutes(); // 输出分 41  var second = date.getSeconds(); // 输出秒 22  return `${year}-${month}-${dates} ${hour}:${minute}:${second}`;}</code></pre><h4 id="当前时间-gt-时间戳"><a href="#当前时间-gt-时间戳" class="headerlink" title="当前时间 -> 时间戳"></a>当前时间 -&gt; 时间戳</h4><p>当前时间(形如’2018-12-28 17:41:22’) -&gt; 时间戳</p><blockquote><p>安卓系统中，<code>-</code>或者<code>/</code>符号都可以；<br>iOS系统，只能识别<code>/</code>符号。</p></blockquote><p>具体实现方法如下：</p><pre><code>var date = new Date('2018-11-28 17:41:22'); // 输出date= Fri Dec 28 2018 17:41:22 GMT+0800 (中国标准时间)// 有三种方案获取时间戳var time1 = date.getTime()； // 方案一：精确到毫秒，输出 1545990082123var time2 = date.valueOf()； // 方案二：精确到毫秒，输出 1545990082123var time3 = Date.parse(date)； // 方案三：精确到秒，输出 1545990082000</code></pre><h4 id="国际标准时间-gt-时间戳"><a href="#国际标准时间-gt-时间戳" class="headerlink" title="国际标准时间 -> 时间戳"></a>国际标准时间 -&gt; 时间戳</h4><p>国际标准时间(形如’2019-03-15T09:15:32.473Z’) -&gt; 时间戳</p><h4 id="获取当前时间的前-后一天"><a href="#获取当前时间的前-后一天" class="headerlink" title="获取当前时间的前/后一天"></a>获取当前时间的前/后一天</h4><p>实现方法如下：</p><pre><code>let curDate = new Date(); // Tue Sep 17 2019 13:55:11 GMT+0800 (中国标准时间)// 当前时间的前一天let preDate = new Date(curDate.getTime() - 24 * 60 * 60 * 1000); // Mon Sep 16 2019 13:55:11 GMT+0800 (中国标准时间)// 当前时间的后一天let nextDate = new Date(curDate.getTime() + 24 * 60 * 60 * 1000); // Wed Sep 18 2019 13:55:11 GMT+0800 (中国标准时间)</code></pre><h4 id="获取具体某月的天数"><a href="#获取具体某月的天数" class="headerlink" title="获取具体某月的天数"></a>获取具体某月的天数</h4><p>通过Date对象可以获取到具体某月的天数是多少，而且不需要判断年份是否是闰年。<br>实现方法如下：</p><pre><code>let dt = new Date(2015, 2, 0);let monthDate = dt.getDate();console.log(monthDate); // 28</code></pre><p>其中Date对象里的三个参数一次表示 某年、某月、0。Date对象的月份是从0开始的，也就是说1月份用0表示，所以上述的0就表示为3月份的第0天，但是JS中日期的范围是1～31，所以当日期设为0时，会向前一天，也就是上个月的最后一天。</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;项目开发中，有时需要将服务端返回的时间数据格式化，服务端返回的时间格式不同，前端对时间的操作方法也不一样。&lt;br&gt;以下是我在项目开发中遇到的一些对时间进行相关操作的总结。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="date" scheme="https://cubemmc.github.io/sugarZ/categories/date/"/>
+    
+    
+      <category term="Javascript" scheme="https://cubemmc.github.io/sugarZ/tags/Javascript/"/>
+    
+      <category term="date" scheme="https://cubemmc.github.io/sugarZ/tags/date/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Regex 正则表达式基础知识总结</title>
+    <link href="https://cubemmc.github.io/sugarZ//posts/b8a0c513/"/>
+    <id>https://cubemmc.github.io/sugarZ//posts/b8a0c513/</id>
+    <published>2019-09-04T16:00:00.000Z</published>
+    <updated>2019-09-17T07:52:59.532Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在一个项目开发中，被正则表达式折腾的头疼，所以最近忙里偷闲，针对正则的基础语法和常用正则表达式进行了一次总结，避免自己遗忘。</p><a id="more"></a><img src="/sugarZ/img/1.jpg" title="图片来源于网络，侵删"><h4 id="什么是正则表达式？"><a href="#什么是正则表达式？" class="headerlink" title="什么是正则表达式？"></a>什么是正则表达式？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;正则表达式(Regular Expression)是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。正则表达式包含普通字符（例如，<code>a</code>到<code>z</code>之间的字母）和特殊字符（称为”元字符”）,通常被用来检索、替换那些符合某个模式(规则)的文本。</p><h4 id="正则表达式的用途是什么？"><a href="#正则表达式的用途是什么？" class="headerlink" title="正则表达式的用途是什么？"></a>正则表达式的用途是什么？</h4><p>正则表达式的用途有两种，一个是搜索字符串，一个是替换字符串。</p><h4 id="正则表达式的元字符"><a href="#正则表达式的元字符" class="headerlink" title="正则表达式的元字符"></a>正则表达式的元字符</h4><h5 id="常用的元字符"><a href="#常用的元字符" class="headerlink" title="常用的元字符"></a>常用的元字符</h5><table><thead><tr><th>字符</th><th align="center">描述</th></tr></thead><tbody><tr><td>^</td><td align="center">匹配输入字符串的开始位置。</td></tr><tr><td>$</td><td align="center">匹配输入字符串的结束位置。</td></tr><tr><td>*</td><td align="center">匹配前面的 子表达式 零次或多次。</td></tr><tr><td>+</td><td align="center">匹配前面的 子表达式 一次或多次。</td></tr><tr><td>?</td><td align="center">匹配前面的 子表达式 零次或一次。</td></tr><tr><td>{n}</td><td align="center">首先n是一个非负整数&gt;=0，表示前面的字符/字符串 有n个，这是一个确定的值，不是范围！</td></tr><tr><td>{n,}</td><td align="center">首先n是一个非负整数&gt;=0，表示前面的字符/字符串 至少有n个，这是一个范围！</td></tr><tr><td>{n,m}</td><td align="center">首先n和m均为非负整数&gt;=0，且n &lt;= m，表示前面的字符/字符串 至少有n个，至多有m个，这是一个范围！</td></tr><tr><td>x</td><td align="center">y</td></tr><tr><td>[]</td><td align="center">单个字符的集合范围。</td></tr><tr><td>[^xyz]</td><td align="center">匹配未包含的任意字符。例如，[^abc] 可以匹配”plain”中的’p’、’l’、’i’、’n’。</td></tr><tr><td>\b</td><td align="center">匹配一个单词边界，即该元字符代表的位置必须是字符串的边界。</td></tr><tr><td>\B</td><td align="center">匹配一个非单词边界，同上面的相反。</td></tr><tr><td>\d</td><td align="center">匹配数字字符，等价于[0-9]。</td></tr><tr><td>\D</td><td align="center">匹配非数字字符，等价于[^0-9]。</td></tr><tr><td>\n</td><td align="center">匹配换行符，等价于 \x0a 和 \cJ。</td></tr><tr><td>\r</td><td align="center">匹配回车符，等价于 \x0d 和 \cM。</td></tr><tr><td>\s</td><td align="center">匹配任何空白字符，包括空格、制表符、换页符等等，等价于 [ \f\n\r\t\v]。</td></tr><tr><td>\w</td><td align="center">匹配字母、数字、下划线。等价于 [A-Za-z0-9_]。</td></tr></tbody></table><p>如果想要了解更多正则表达式的元字符，可自行前往<a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">菜鸟教程</a>查看。</p><h5 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h5><p>特殊字符如果需要单独使用，需要在前面加上转义字符\。<br>需要转义的特殊字符有以下几个：<br><code>$</code>、<code>(</code>、<code>)</code>、<code>*</code>、<code>+</code>、<code>.</code>、<code>[</code>、<code>?</code>、<code>\</code>、<code>^</code>、<code>{</code>、<code>|</code>。</p><h5 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h5><p>限定符包含：<br><code>*</code>、<code>+</code>、<code>?</code>、<code>{n}</code>、<code>{n,}</code>、<code>{n,m}</code>。</p><h5 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h5><p>定位符包含：<br><code>^</code>、<code>$</code>、<code>\b</code>、<code>\B</code>。</p><h4 id="正则表达式的使用注意事项"><a href="#正则表达式的使用注意事项" class="headerlink" title="正则表达式的使用注意事项"></a>正则表达式的使用注意事项</h4><h5 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a>运算符的优先级</h5><p>运算符优先级从高到低：<br><code>\</code> &gt; <code>()</code> <code>[]</code> &gt; 限定符 &gt; <code>^</code> <code>$</code> <code>\任何元字符</code> <code>任何字符</code> &gt; <code>|</code></p><h5 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h5><h1 id="lt-lt-lt-lt-lt-lt-lt-HEAD"><a href="#lt-lt-lt-lt-lt-lt-lt-HEAD" class="headerlink" title="<<<<<<< HEAD"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h1><p>暂无</p><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><p>8736f6a8392ebef6f562f3b86d434bf7604e54e0</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote><h4 id="正则表达式在线测试工具"><a href="#正则表达式在线测试工具" class="headerlink" title="正则表达式在线测试工具"></a>正则表达式在线测试工具</h4><p>推荐<a href="https://c.runoob.com/front-end/854" target="_blank" rel="noopener">菜鸟的正则表达式在线测试工具</a></p><h4 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h4><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p><ul><li><h1 id="中文字符-u4e00-u9fa5"><a href="#中文字符-u4e00-u9fa5" class="headerlink" title="中文字符 [\u4e00-\u9fa5]"></a>中文字符 <code>[\u4e00-\u9fa5]</code></h1></li></ul><ol><li>中文字符 <code>[\u4e00-\u9fa5]</code><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><p>8736f6a8392ebef6f562f3b86d434bf7604e54e0</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></li></ol><style>table th:nth-of-type(1){  width: 20%;}table th:nth-of-type(2){  width: 80%;}table tr td:nth-of-type(1){  text-align: center;}table tr td:nth-of-type(2){  text-align: left;}</style><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在一个项目开发中，被正则表达式折腾的头疼，所以最近忙里偷闲，针对正则的基础语法和常用正则表达式进行了一次总结，避免自己遗忘。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Regex" scheme="https://cubemmc.github.io/sugarZ/categories/Regex/"/>
+    
+    
+      <category term="语法" scheme="https://cubemmc.github.io/sugarZ/tags/%E8%AF%AD%E6%B3%95/"/>
+    
+      <category term="Regex" scheme="https://cubemmc.github.io/sugarZ/tags/Regex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你不知道的css小知识</title>
+    <link href="https://cubemmc.github.io/sugarZ//posts/a6497cb5/"/>
+    <id>https://cubemmc.github.io/sugarZ//posts/a6497cb5/</id>
+    <published>2019-08-30T08:34:51.000Z</published>
+    <updated>2019-09-17T07:52:59.517Z</updated>
+    
+    <content type="html"><![CDATA[<p>你不知道的css小知识。</p><a id="more"></a><p>本文章总结了一些常用或者不常用的css技巧知识，并且将会持续更新。</p><h4 id="图片点击穿透"><a href="#图片点击穿透" class="headerlink" title="图片点击穿透"></a>图片点击穿透</h4><p>&nbsp;&nbsp;&nbsp;一张图片覆盖在了另一张图片上，需要穿透上面的图片，实现底层图片的点击事件，可以在上层图片的样式中添加样式<code>pointer-events: none;</code>,可以实现这个效果。该css属性在大多数浏览器下都可用，通用性比较强，具体可参考下图（图片来源于<a href="https://www.caniuse.com/#search=pointer-events" target="_blank" rel="noopener">canIuse网站查询</a>）：</p><img src="/sugarZ/img/pointer_events_use.jpg" title="pointer-events可用浏览器"><h4 id="英文单词换行"><a href="#英文单词换行" class="headerlink" title="英文单词换行"></a>英文单词换行</h4><p>&nbsp;&nbsp;&nbsp;可以设置文本的样式为<code>word-break:break-all</code>，来实现英文单词换行的效果，且不管是什么字符，都是本行放不下就直接换行。该css属性在国内浏览器都可使用，只要浏览器内核版本不是特别低，都是可用的，所以放心大胆的用吧。</p><h4 id="white-space"><a href="#white-space" class="headerlink" title="white-space"></a>white-space</h4><p>white-space包含以下五种属性：</p><blockquote><ul><li>normal：默认属性，合并空白字符和换行符。意思就是看见连续的空格或回车，一律处理成单个空格。</li><li>pre：空格字符不合并，并且内容只有在有换行符的地方换行，也就是自动换行的能力消失。</li><li>nowrap：和normal一样会合并空白字符，但不允许文本换行。</li><li>pre-wrap：空白字符不合并，并且内容会在有换行符的地方换行，也支持自动换行。</li><li>pre-line：空白字符合并，内容支持自动换行和手动换行。</li></ul></blockquote><h4 id="不可思议的纯css滚动进度条效果"><a href="#不可思议的纯css滚动进度条效果" class="headerlink" title="不可思议的纯css滚动进度条效果"></a>不可思议的纯css滚动进度条效果</h4><p>利用线性渐变来实现css的滚动条效果，来源于<a href="https://juejin.im/post/5c35953ce51d45523f04b6d2" target="_blank" rel="noopener">纯css滚动进度条的实现[作者：chokcoco]</a></p><h4 id="如何设置文本两端对齐？"><a href="#如何设置文本两端对齐？" class="headerlink" title="如何设置文本两端对齐？"></a>如何设置文本两端对齐？</h4><p>实现效果如下：</p><img src="/sugarZ/img/text_align_last.jpg" width="150" height="200"><p>具体实现方法可查看：<a href="https://codepen.io/cubemmc/pen/yLBPJPr" target="_blank" rel="noopener">文本两端对齐</a></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;你不知道的css小知识。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="css" scheme="https://cubemmc.github.io/sugarZ/categories/css/"/>
+    
+    
+      <category term="css" scheme="https://cubemmc.github.io/sugarZ/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git - 基础命令清单</title>
+    <link href="https://cubemmc.github.io/sugarZ//posts/e930fae2/"/>
+    <id>https://cubemmc.github.io/sugarZ//posts/e930fae2/</id>
+    <published>2019-08-29T16:00:00.000Z</published>
+    <updated>2019-09-17T07:52:59.520Z</updated>
+    
+    <content type="html"><![CDATA[<p>常用的git基础命令清单总结。</p><a id="more"></a><p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">参考：阮一峰网络日志</a></p><h4 id="新建代码库"><a href="#新建代码库" class="headerlink" title="新建代码库"></a>新建代码库</h4><h5 id="在当前目录新建一个Git代码库"><a href="#在当前目录新建一个Git代码库" class="headerlink" title="在当前目录新建一个Git代码库"></a>在当前目录新建一个Git代码库</h5><p><code>git init</code></p><h5 id="新建一个目录，将其初始化为Git代码库"><a href="#新建一个目录，将其初始化为Git代码库" class="headerlink" title="新建一个目录，将其初始化为Git代码库"></a>新建一个目录，将其初始化为Git代码库</h5><p><code>git init [project-name]</code></p><h5 id="下载一个项目和它的整个代码历史"><a href="#下载一个项目和它的整个代码历史" class="headerlink" title="下载一个项目和它的整个代码历史"></a>下载一个项目和它的整个代码历史</h5><p><code>git clone [url]</code></p><h4 id="提交代码到远程仓库的流程"><a href="#提交代码到远程仓库的流程" class="headerlink" title="提交代码到远程仓库的流程"></a>提交代码到远程仓库的流程</h4><h5 id="添加当前目录的所有文件到暂存区"><a href="#添加当前目录的所有文件到暂存区" class="headerlink" title="添加当前目录的所有文件到暂存区"></a>添加当前目录的所有文件到暂存区</h5><p><code>git add .</code></p><h5 id="提交暂存区到仓库区"><a href="#提交暂存区到仓库区" class="headerlink" title="提交暂存区到仓库区"></a>提交暂存区到仓库区</h5><p><code>git commit -m [提交信息]</code></p><h5 id="拉取远程仓库到本地代码库"><a href="#拉取远程仓库到本地代码库" class="headerlink" title="拉取远程仓库到本地代码库"></a>拉取远程仓库到本地代码库</h5><p><code>git pull [远程仓库名] [分支名]</code></p><h5 id="提交暂存区到远程仓库"><a href="#提交暂存区到远程仓库" class="headerlink" title="提交暂存区到远程仓库"></a>提交暂存区到远程仓库</h5><p><code>git push [远程仓库名] [分支名]</code></p><h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><h5 id="列出所有本地分支"><a href="#列出所有本地分支" class="headerlink" title="列出所有本地分支"></a>列出所有本地分支</h5><p><code>git branch</code></p><h5 id="列出所有远程分支"><a href="#列出所有远程分支" class="headerlink" title="列出所有远程分支"></a>列出所有远程分支</h5><p><code>git branch -r</code></p><h5 id="列出所有本地分支和远程分支"><a href="#列出所有本地分支和远程分支" class="headerlink" title="列出所有本地分支和远程分支"></a>列出所有本地分支和远程分支</h5><p><code>git branch -a</code></p><h5 id="新建一个分支，但依然停留在当前分支"><a href="#新建一个分支，但依然停留在当前分支" class="headerlink" title="新建一个分支，但依然停留在当前分支"></a>新建一个分支，但依然停留在当前分支</h5><p><code>git branch [branch-name]</code></p><h5 id="新建一个分支，并切换到该分支"><a href="#新建一个分支，并切换到该分支" class="headerlink" title="新建一个分支，并切换到该分支"></a>新建一个分支，并切换到该分支</h5><p><code>git checkout -b [branch]</code></p><h5 id="切换到指定分支，并更新工作区"><a href="#切换到指定分支，并更新工作区" class="headerlink" title="切换到指定分支，并更新工作区"></a>切换到指定分支，并更新工作区</h5><p><code>git checkout [branch-name]</code></p><h5 id="切换到上一个分支"><a href="#切换到上一个分支" class="headerlink" title="切换到上一个分支"></a>切换到上一个分支</h5><p><code>git checkout -</code></p><h5 id="新建一个分支，指向指定commit"><a href="#新建一个分支，指向指定commit" class="headerlink" title="新建一个分支，指向指定commit"></a>新建一个分支，指向指定commit</h5><p><code>git branch [branch] [commit]</code></p><h5 id="新建一个分支，与指定的远程分支建立追踪关系"><a href="#新建一个分支，与指定的远程分支建立追踪关系" class="headerlink" title="新建一个分支，与指定的远程分支建立追踪关系"></a>新建一个分支，与指定的远程分支建立追踪关系</h5><p><code>git branch --track [branch] [remote-branch]</code></p><h5 id="合并指定分支到当前分支"><a href="#合并指定分支到当前分支" class="headerlink" title="合并指定分支到当前分支"></a>合并指定分支到当前分支</h5><p><code>git merge [branch]</code></p><h5 id="选择一个commit，合并进当前分支"><a href="#选择一个commit，合并进当前分支" class="headerlink" title="选择一个commit，合并进当前分支"></a>选择一个commit，合并进当前分支</h5><p><code>git cherry-pick [commit]</code></p><h5 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h5><p><code>git branch -d [branch-name]</code></p><h5 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h5><p><code>git push origin --delete [branch-name]</code><br><code>git branch -dr [remote/branch]</code></p><h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><h5 id="显示有变更的文件"><a href="#显示有变更的文件" class="headerlink" title="显示有变更的文件"></a>显示有变更的文件</h5><p><code>git status</code></p><h5 id="显示当前分支的版本历史"><a href="#显示当前分支的版本历史" class="headerlink" title="显示当前分支的版本历史"></a>显示当前分支的版本历史</h5><p><code>git log</code></p><h5 id="显示过去5次提交"><a href="#显示过去5次提交" class="headerlink" title="显示过去5次提交"></a>显示过去5次提交</h5><p><code>git log -5 --pretty --oneline</code></p><h5 id="显示指定文件是什么人在什么时间修改过"><a href="#显示指定文件是什么人在什么时间修改过" class="headerlink" title="显示指定文件是什么人在什么时间修改过"></a>显示指定文件是什么人在什么时间修改过</h5><p><code>git blame [file]</code></p><h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><h5 id="显示所有远程仓库"><a href="#显示所有远程仓库" class="headerlink" title="显示所有远程仓库"></a>显示所有远程仓库</h5><p><code>git remote -v</code></p><h5 id="增加一个新的远程仓库，并命名"><a href="#增加一个新的远程仓库，并命名" class="headerlink" title="增加一个新的远程仓库，并命名"></a>增加一个新的远程仓库，并命名</h5><p><code>git remote add [远程仓库命名] [远程仓库url]</code></p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;常用的git基础命令清单总结。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="git" scheme="https://cubemmc.github.io/sugarZ/categories/git/"/>
+    
+    
+      <category term="语法" scheme="https://cubemmc.github.io/sugarZ/tags/%E8%AF%AD%E6%B3%95/"/>
+    
+      <category term="git" scheme="https://cubemmc.github.io/sugarZ/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初识Hexo</title>
+    <link href="https://cubemmc.github.io/sugarZ//posts/97bd5563/"/>
+    <id>https://cubemmc.github.io/sugarZ//posts/97bd5563/</id>
+    <published>2019-08-27T16:00:00.000Z</published>
+    <updated>2019-09-17T07:52:59.519Z</updated>
+    
+    <content type="html"><![CDATA[<p>hexo的学习历程中，学习到的hexo语法以及一些技巧。</p><a id="more"></a><p>最近在学习利用hexo来搭建个人博客，把学习过程中遇到的问题以及学习到的语法进行来总结，希望可以帮到其他小伙伴们。</p><h3 id="新增post文章页面"><a href="#新增post文章页面" class="headerlink" title="新增post文章页面"></a>新增post文章页面</h3><p>命令行输入：<code>hexo new [layout] &lt;title&gt;</code>。<br>其中，<code>layout</code>指文章页面的布局，默认为post，可不输入。PS：可以通过修改 _config.yml 中的 default_layout 参数来指定默认布局。<code>title</code>指文章的标题，默认文件名称就是标题的名称。</p><h3 id="标签插件"><a href="#标签插件" class="headerlink" title="标签插件"></a>标签插件</h3><p>标签插件估计是最常用的一个语法，它是用于在文章中快速插入特定内容的插件，跟markdown语法中类似。</p><h4 id="引用块-blockquote-endblockquote"><a href="#引用块-blockquote-endblockquote" class="headerlink" title="引用块 - blockquote/endblockquote"></a>引用块 - blockquote/endblockquote</h4><p>语法如下：</p><pre><code>{% blockquote [作者[, 其他资源信息]] [链接] [链接标题] %}展示内容{% endblockquote %}</code></pre><p>示例：</p><pre><code>{% blockquote sugarZ, 程序圆 http://localhost:4000/sugarZ/2019/08/27/first-realize/ sugarZ的博客 %}展示内容{% endblockquote %}</code></pre><blockquote><p>展示内容</p><footer><strong>sugarZ, 程序圆</strong><cite><a href="http://localhost:4000/sugarZ/2019/08/27/first-realize/" target="_blank" rel="noopener">sugarZ的博客</a></cite></footer></blockquote><h4 id="代码块-codeblock-endcodeblock"><a href="#代码块-codeblock-endcodeblock" class="headerlink" title="代码块 - codeblock/endcodeblock"></a>代码块 - codeblock/endcodeblock</h4><p>语法如下：</p><pre><code>{% codeblock [标题] [lang:language] [链接] [链接title] %}code snippet{% endcodeblock %}</code></pre><p>代码块的语法除了hexo特有的这种，还有就是markdown中的反引号语法，效果一样，反引号语法如下：</p><pre><code>``` [language] [title] [url] [link text] code snippet ```</code></pre><p>示例：</p>{% codeblock %}alert('Hello World!'){% endcodeblock %}<h4 id="Pull-Quote"><a href="#Pull-Quote" class="headerlink" title="Pull Quote"></a>Pull Quote</h4><p>语法：</p><pre><code>{% pullquote [class] %}content{% endpullquote %}</code></pre><p>示例：</p><blockquote class="pullquote"><p>content</p></blockquote><h4 id="插入图片-Image"><a href="#插入图片-Image" class="headerlink" title="插入图片 - Image"></a>插入图片 - Image</h4><p>在文章中插入图片，可自定义图片宽高，语法：</p><pre><code>{% img [class names] /path/to/image [width] [height] "title text 'alt text'" %}</code></pre><p>示例：</p>{% img /path/to/image 100 20 "ceshi" %}<h4 id="文章中插入链接-Link"><a href="#文章中插入链接-Link" class="headerlink" title="文章中插入链接 - Link"></a>文章中插入链接 - Link</h4><p>在文章中插入链接，并自动给外部链接添加<code>target="_blank"</code>属性，语法：</p><pre><code>{% link链接文案 链接url [external] [title]%}</code></pre><p>示例：</p><a href="http://localhost:4000/sugarZ/2019/08/27/first-realize/" target="_blank" rel="noopener">text</a><h4 id="实现段落文本缩进"><a href="#实现段落文本缩进" class="headerlink" title="实现段落文本缩进"></a>实现段落文本缩进</h4><p>可以在需要缩进的段落文本前添加<code>&amp;nbsp;&amp;nbsp;&amp;nbsp;</code>，来实现段落文本的缩进。每一个<code>&amp;nbsp;</code>代表一个空格的距离。</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;hexo的学习历程中，学习到的hexo语法以及一些技巧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="基础" scheme="https://cubemmc.github.io/sugarZ/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="hexo" scheme="https://cubemmc.github.io/sugarZ/tags/hexo/"/>
+    
+      <category term="语法" scheme="https://cubemmc.github.io/sugarZ/tags/%E8%AF%AD%E6%B3%95/"/>
+    
+  </entry>
+  
+</feed>

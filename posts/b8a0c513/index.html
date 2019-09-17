@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Regex 正则表达式基础知识总结 | sugarZ的博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="语法,Regex">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="最近在一个项目开发中，被正则表达式折腾的头疼，所以最近忙里偷闲，针对正则的基础语法和常用正则表达式进行了一次总结，避免自己遗忘。">
+<meta name="keywords" content="语法,Regex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Regex 正则表达式基础知识总结">
+<meta property="og:url" content="https://cubemmc.github.io/sugarZ/posts/b8a0c513/index.html">
+<meta property="og:site_name" content="sugarZ的博客">
+<meta property="og:description" content="最近在一个项目开发中，被正则表达式折腾的头疼，所以最近忙里偷闲，针对正则的基础语法和常用正则表达式进行了一次总结，避免自己遗忘。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://cubemmc.github.io/sugarZ/img/1.jpg">
+<meta property="og:updated_time" content="2019-09-17T07:52:59.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regex 正则表达式基础知识总结">
+<meta name="twitter:description" content="最近在一个项目开发中，被正则表达式折腾的头疼，所以最近忙里偷闲，针对正则的基础语法和常用正则表达式进行了一次总结，避免自己遗忘。">
+<meta name="twitter:image" content="https://cubemmc.github.io/sugarZ/img/1.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="sugarZ的博客" href="/sugarZ/atom.xml">
+    
+    <link rel="shortcut icon" href="/sugarZ/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/sugarZ/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/sugarZ/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/sugarZ/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">sugarZ</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:2625360443@qq.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/cubemmc/sugarZ" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Regex 正则表达式基础知识总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <!-- <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a> -->
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#什么是正则表达式？"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是正则表达式？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#正则表达式的用途是什么？"><span class="post-toc-number">2.</span> <span class="post-toc-text">正则表达式的用途是什么？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#正则表达式的元字符"><span class="post-toc-number">3.</span> <span class="post-toc-text">正则表达式的元字符</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#常用的元字符"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">常用的元字符</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#特殊字符"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">特殊字符</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#限定符"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">限定符</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#定位符"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">定位符</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#正则表达式的使用注意事项"><span class="post-toc-number">4.</span> <span class="post-toc-text">正则表达式的使用注意事项</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#运算符的优先级"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">运算符的优先级</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#其他注意事项"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">其他注意事项</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#lt-lt-lt-lt-lt-lt-lt-HEAD"><span class="post-toc-number"></span> <span class="post-toc-text">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#正则表达式在线测试工具"><span class="post-toc-number">1.</span> <span class="post-toc-text">正则表达式在线测试工具</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#常用的正则表达式"><span class="post-toc-number">2.</span> <span class="post-toc-text">常用的正则表达式</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#中文字符-u4e00-u9fa5"><span class="post-toc-number"></span> <span class="post-toc-text">中文字符 [\u4e00-\u9fa5]</span></a>
+        </nav>
+    </aside>
+   
+<article id="post-regex/regex-base"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Regex 正则表达式基础知识总结</h1>
+        <div class="post-meta">
+            <!-- <i class="icon icon-lg icon-calendar-o"></i>
+            发表于 -->
+            <time class="post-time" title="2019-09-05 00:00:00" datetime="2019-09-04T16:00:00.000Z"  itemprop="datePublished">2019-09-05</time>
+
+            <br id="mybreak"/>
+            <!-- 
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/sugarZ/categories/Regex/">Regex</a></li></ul>
+
+ -->
+            <!-- <i>·</i> -->
+            <!-- 
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+ -->
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">3</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>最近在一个项目开发中，被正则表达式折腾的头疼，所以最近忙里偷闲，针对正则的基础语法和常用正则表达式进行了一次总结，避免自己遗忘。</p>
+<a id="more"></a>
+<img src="/sugarZ/img/1.jpg" title="图片来源于网络，侵删">
+
+<h4 id="什么是正则表达式？"><a href="#什么是正则表达式？" class="headerlink" title="什么是正则表达式？"></a>什么是正则表达式？</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;正则表达式(Regular Expression)是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。正则表达式包含普通字符（例如，<code>a</code>到<code>z</code>之间的字母）和特殊字符（称为”元字符”）,通常被用来检索、替换那些符合某个模式(规则)的文本。</p>
+<h4 id="正则表达式的用途是什么？"><a href="#正则表达式的用途是什么？" class="headerlink" title="正则表达式的用途是什么？"></a>正则表达式的用途是什么？</h4><p>正则表达式的用途有两种，一个是搜索字符串，一个是替换字符串。</p>
+<h4 id="正则表达式的元字符"><a href="#正则表达式的元字符" class="headerlink" title="正则表达式的元字符"></a>正则表达式的元字符</h4><h5 id="常用的元字符"><a href="#常用的元字符" class="headerlink" title="常用的元字符"></a>常用的元字符</h5><table>
+<thead>
+<tr>
+<th>字符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>^</td>
+<td align="center">匹配输入字符串的开始位置。</td>
+</tr>
+<tr>
+<td>$</td>
+<td align="center">匹配输入字符串的结束位置。</td>
+</tr>
+<tr>
+<td>*</td>
+<td align="center">匹配前面的 子表达式 零次或多次。</td>
+</tr>
+<tr>
+<td>+</td>
+<td align="center">匹配前面的 子表达式 一次或多次。</td>
+</tr>
+<tr>
+<td>?</td>
+<td align="center">匹配前面的 子表达式 零次或一次。</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td align="center">首先n是一个非负整数&gt;=0，表示前面的字符/字符串 有n个，这是一个确定的值，不是范围！</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td align="center">首先n是一个非负整数&gt;=0，表示前面的字符/字符串 至少有n个，这是一个范围！</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td align="center">首先n和m均为非负整数&gt;=0，且n &lt;= m，表示前面的字符/字符串 至少有n个，至多有m个，这是一个范围！</td>
+</tr>
+<tr>
+<td>x</td>
+<td align="center">y</td>
+</tr>
+<tr>
+<td>[]</td>
+<td align="center">单个字符的集合范围。</td>
+</tr>
+<tr>
+<td>[^xyz]</td>
+<td align="center">匹配未包含的任意字符。例如，[^abc] 可以匹配”plain”中的’p’、’l’、’i’、’n’。</td>
+</tr>
+<tr>
+<td>\b</td>
+<td align="center">匹配一个单词边界，即该元字符代表的位置必须是字符串的边界。</td>
+</tr>
+<tr>
+<td>\B</td>
+<td align="center">匹配一个非单词边界，同上面的相反。</td>
+</tr>
+<tr>
+<td>\d</td>
+<td align="center">匹配数字字符，等价于[0-9]。</td>
+</tr>
+<tr>
+<td>\D</td>
+<td align="center">匹配非数字字符，等价于[^0-9]。</td>
+</tr>
+<tr>
+<td>\n</td>
+<td align="center">匹配换行符，等价于 \x0a 和 \cJ。</td>
+</tr>
+<tr>
+<td>\r</td>
+<td align="center">匹配回车符，等价于 \x0d 和 \cM。</td>
+</tr>
+<tr>
+<td>\s</td>
+<td align="center">匹配任何空白字符，包括空格、制表符、换页符等等，等价于 [ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\w</td>
+<td align="center">匹配字母、数字、下划线。等价于 [A-Za-z0-9_]。</td>
+</tr>
+</tbody></table>
+<p>如果想要了解更多正则表达式的元字符，可自行前往<a href="https://www.runoob.com/regexp/regexp-metachar.html" target="_blank" rel="noopener">菜鸟教程</a>查看。</p>
+<h5 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h5><p>特殊字符如果需要单独使用，需要在前面加上转义字符\。<br>需要转义的特殊字符有以下几个：<br><code>$</code>、<code>(</code>、<code>)</code>、<code>*</code>、<code>+</code>、<code>.</code>、<code>[</code>、<code>?</code>、<code>\</code>、<code>^</code>、<code>{</code>、<code>|</code>。</p>
+<h5 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h5><p>限定符包含：<br><code>*</code>、<code>+</code>、<code>?</code>、<code>{n}</code>、<code>{n,}</code>、<code>{n,m}</code>。</p>
+<h5 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h5><p>定位符包含：<br><code>^</code>、<code>$</code>、<code>\b</code>、<code>\B</code>。</p>
+<h4 id="正则表达式的使用注意事项"><a href="#正则表达式的使用注意事项" class="headerlink" title="正则表达式的使用注意事项"></a>正则表达式的使用注意事项</h4><h5 id="运算符的优先级"><a href="#运算符的优先级" class="headerlink" title="运算符的优先级"></a>运算符的优先级</h5><p>运算符优先级从高到低：<br><code>\</code> &gt; <code>()</code> <code>[]</code> &gt; 限定符 &gt; <code>^</code> <code>$</code> <code>\任何元字符</code> <code>任何字符</code> &gt; <code>|</code></p>
+<h5 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h5><h1 id="lt-lt-lt-lt-lt-lt-lt-HEAD"><a href="#lt-lt-lt-lt-lt-lt-lt-HEAD" class="headerlink" title="<<<<<<< HEAD"></a>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h1><p>暂无</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>8736f6a8392ebef6f562f3b86d434bf7604e54e0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<h4 id="正则表达式在线测试工具"><a href="#正则表达式在线测试工具" class="headerlink" title="正则表达式在线测试工具"></a>正则表达式在线测试工具</h4><p>推荐<a href="https://c.runoob.com/front-end/854" target="_blank" rel="noopener">菜鸟的正则表达式在线测试工具</a></p>
+<h4 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h4><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+<ul>
+<li><h1 id="中文字符-u4e00-u9fa5"><a href="#中文字符-u4e00-u9fa5" class="headerlink" title="中文字符 [\u4e00-\u9fa5]"></a>中文字符 <code>[\u4e00-\u9fa5]</code></h1></li>
+</ul>
+<ol>
+<li>中文字符 <code>[\u4e00-\u9fa5]</code><blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>8736f6a8392ebef6f562f3b86d434bf7604e54e0</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
+<style>
+table th:nth-of-type(1){
+  width: 20%;
+}
+table th:nth-of-type(2){
+  width: 80%;
+}
+table tr td:nth-of-type(1){
+  text-align: center;
+}
+table tr td:nth-of-type(2){
+  text-align: left;
+}
+</style>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2019-09-17T07:52:59.532Z" itemprop="dateUpdated">2019-09-17 15:52:59</time>
+</span>
+
+
+        
+        原文链接：<a href="/sugarZ/posts/b8a0c513/" target="_blank" rel="external">https://cubemmc.github.io/sugarZ/posts/b8a0c513/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://cubemmc.github.io/sugarZ'">
+            <img src="/sugarZ/img/avatar.jpg" alt="sugarZ">
+            <a>sugarZ</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sugarZ/tags/Regex/">Regex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sugarZ/tags/语法/">语法</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/sugarZ/posts/6f949845/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：JS中对于时间以及时间戳的各种操作
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/sugarZ/posts/a6497cb5/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：你不知道的css小知识">下一篇：你不知道的css小知识</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://cubemmc.github.io/sugarZ">cubemmc.github.io/sugarZ/</a>
+            <!-- <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a> -->
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;display:none"></span>
+        <!-- <br/> -->
+
+        <span style="display:none">
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license" style="display:none"><a  target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/sugarZ/', SHARE: false, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/sugarZ/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/sugarZ/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/sugarZ/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "sugarZ");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c sugarZ的博客 %c  © sugarZ  https://cubemmc.github.io/sugarZ/ \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <meta charset="utf-8">
+    
+    
+    
+    <title>git - 基础命令清单 | sugarZ的博客</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    <meta name="theme-color" content="#77AAFF">
+    
+    
+    <meta name="keywords" content="语法,git">
+    
+    
+
+    
+
+    <!-- Baidu Push -->
+<script>
+	(function(){
+		var bp = document.createElement('script');
+		var curProtocol = window.location.protocol.split(':')[0];
+		if (curProtocol === 'https') {
+			bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+		}
+		else {
+			bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+		}
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(bp, s);
+	})();
+
+	var _hmt = _hmt || [];
+</script>
+
+
+
+    
+    <meta name="description" content="常用的git基础命令清单总结。">
+<meta name="keywords" content="语法,git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git - 基础命令清单">
+<meta property="og:url" content="https://cubemmc.github.io/sugarZ/posts/e930fae2/index.html">
+<meta property="og:site_name" content="sugarZ的博客">
+<meta property="og:description" content="常用的git基础命令清单总结。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-17T07:52:59.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git - 基础命令清单">
+<meta name="twitter:description" content="常用的git基础命令清单总结。">
+    
+        <link rel="alternate" type="application/atom+xml" title="sugarZ的博客" href="/sugarZ/atom.xml">
+    
+    <link rel="shortcut icon" href="/sugarZ/img/favicon.ico">
+    <link id="style" rel="stylesheet" href="/sugarZ/css/style.css?v=3.0">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+            
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+    <aside id="menu"  class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" >
+      <div class="brand">
+        <a href="/sugarZ/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/sugarZ/img/avatar.jpg" alt="avatar">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname" id="name">sugarZ</h5>
+          
+            <div id="yiyanmotto" class="motto">&nbsp;</div>
+          
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/"  >
+                    <i class="icon icon-lg icon-home"></i>
+                    <span>主 页</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/archives"  >
+                    <i class="icon icon-lg icon-archives"></i>
+                    <span>归 档</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/categories"  >
+                    <i class="icon icon-lg icon-th-list"></i>
+                    <span>分 类</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/tags"  >
+                    <i class="icon icon-lg icon-tags"></i>
+                    <span>标 签</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+              <li class="waves-block waves-effect">
+                  <a href="/sugarZ/about"  >
+                    <i class="icon icon-lg icon-smile-o"></i>
+                    <span>关 于</span><i class="icon icon-lg icon-caret-left"></i>
+                  </a>
+              </li>
+            
+      <div class="nav2">
+          
+              <a class="nav2item" data-title="Email" href="mailto:2625360443@qq.com" target="_parent"title="Email" >
+                <i class="icon icon-lg icon-envelope-o envelope-o"></i>
+              </a>
+          
+              <a class="nav2item" data-title="Github" href="https://github.com/cubemmc/sugarZ" target="_blank"title="Github" >
+                <i class="icon icon-lg icon-github github"></i>
+              </a>
+          
+
+            </div>
+        
+      </ul>
+        
+    </div>
+  </div>
+ 
+</aside>
+
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">git - 基础命令清单</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        <!-- <a href="../../atom.xml" target="_blank" class="header-icon waves-effect waves-circle waves-light" id="Rss">
+            <i class="icon icon-lg icon-rss"></i>
+        </a> -->
+    </div>
+</header>
+<header class="content-header post-header">
+    
+    
+    <div class="container fade-scale">
+        <div id="myheader">
+            <h1 class="title">
+                
+            </h1>
+            <h5 class="subtitle">
+                
+                
+            </h5>
+        </div>
+    </div>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#新建代码库"><span class="post-toc-number">1.</span> <span class="post-toc-text">新建代码库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#在当前目录新建一个Git代码库"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">在当前目录新建一个Git代码库</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新建一个目录，将其初始化为Git代码库"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">新建一个目录，将其初始化为Git代码库</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#下载一个项目和它的整个代码历史"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">下载一个项目和它的整个代码历史</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#提交代码到远程仓库的流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">提交代码到远程仓库的流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#添加当前目录的所有文件到暂存区"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">添加当前目录的所有文件到暂存区</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#提交暂存区到仓库区"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">提交暂存区到仓库区</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#拉取远程仓库到本地代码库"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">拉取远程仓库到本地代码库</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#提交暂存区到远程仓库"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">提交暂存区到远程仓库</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#分支"><span class="post-toc-number">3.</span> <span class="post-toc-text">分支</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#列出所有本地分支"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">列出所有本地分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#列出所有远程分支"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">列出所有远程分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#列出所有本地分支和远程分支"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">列出所有本地分支和远程分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新建一个分支，但依然停留在当前分支"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">新建一个分支，但依然停留在当前分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新建一个分支，并切换到该分支"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">新建一个分支，并切换到该分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#切换到指定分支，并更新工作区"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">切换到指定分支，并更新工作区</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#切换到上一个分支"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">切换到上一个分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新建一个分支，指向指定commit"><span class="post-toc-number">3.8.</span> <span class="post-toc-text">新建一个分支，指向指定commit</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#新建一个分支，与指定的远程分支建立追踪关系"><span class="post-toc-number">3.9.</span> <span class="post-toc-text">新建一个分支，与指定的远程分支建立追踪关系</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#合并指定分支到当前分支"><span class="post-toc-number">3.10.</span> <span class="post-toc-text">合并指定分支到当前分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#选择一个commit，合并进当前分支"><span class="post-toc-number">3.11.</span> <span class="post-toc-text">选择一个commit，合并进当前分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#删除分支"><span class="post-toc-number">3.12.</span> <span class="post-toc-text">删除分支</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#删除远程分支"><span class="post-toc-number">3.13.</span> <span class="post-toc-text">删除远程分支</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#查看信息"><span class="post-toc-number">4.</span> <span class="post-toc-text">查看信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#显示有变更的文件"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">显示有变更的文件</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#显示当前分支的版本历史"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">显示当前分支的版本历史</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#显示过去5次提交"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">显示过去5次提交</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#显示指定文件是什么人在什么时间修改过"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">显示指定文件是什么人在什么时间修改过</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#远程仓库"><span class="post-toc-number">5.</span> <span class="post-toc-text">远程仓库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#显示所有远程仓库"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">显示所有远程仓库</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#增加一个新的远程仓库，并命名"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">增加一个新的远程仓库，并命名</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+   
+<article id="post-git/git-base"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">git - 基础命令清单</h1>
+        <div class="post-meta">
+            <!-- <i class="icon icon-lg icon-calendar-o"></i>
+            发表于 -->
+            <time class="post-time" title="2019-08-30 00:00:00" datetime="2019-08-29T16:00:00.000Z"  itemprop="datePublished">2019-08-30</time>
+
+            <br id="mybreak"/>
+            <!-- 
+	<i class="icon icon-lg icon-folder-o"></i>
+	分类：<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/sugarZ/categories/git/">git</a></li></ul>
+
+ -->
+            <!-- <i>·</i> -->
+            <!-- 
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>次浏览
+</span>
+
+ -->
+        </div>
+        <div class="post-count-custom">
+            <i class="icon icon-lg icon-comment-o"></i>
+            阅读本文可能花费您&nbsp;<span class="post-count">2</span>&nbsp;分钟
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>常用的git基础命令清单总结。</p>
+<a id="more"></a>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">参考：阮一峰网络日志</a></p>
+<h4 id="新建代码库"><a href="#新建代码库" class="headerlink" title="新建代码库"></a>新建代码库</h4><h5 id="在当前目录新建一个Git代码库"><a href="#在当前目录新建一个Git代码库" class="headerlink" title="在当前目录新建一个Git代码库"></a>在当前目录新建一个Git代码库</h5><p><code>git init</code></p>
+<h5 id="新建一个目录，将其初始化为Git代码库"><a href="#新建一个目录，将其初始化为Git代码库" class="headerlink" title="新建一个目录，将其初始化为Git代码库"></a>新建一个目录，将其初始化为Git代码库</h5><p><code>git init [project-name]</code></p>
+<h5 id="下载一个项目和它的整个代码历史"><a href="#下载一个项目和它的整个代码历史" class="headerlink" title="下载一个项目和它的整个代码历史"></a>下载一个项目和它的整个代码历史</h5><p><code>git clone [url]</code></p>
+<h4 id="提交代码到远程仓库的流程"><a href="#提交代码到远程仓库的流程" class="headerlink" title="提交代码到远程仓库的流程"></a>提交代码到远程仓库的流程</h4><h5 id="添加当前目录的所有文件到暂存区"><a href="#添加当前目录的所有文件到暂存区" class="headerlink" title="添加当前目录的所有文件到暂存区"></a>添加当前目录的所有文件到暂存区</h5><p><code>git add .</code></p>
+<h5 id="提交暂存区到仓库区"><a href="#提交暂存区到仓库区" class="headerlink" title="提交暂存区到仓库区"></a>提交暂存区到仓库区</h5><p><code>git commit -m [提交信息]</code></p>
+<h5 id="拉取远程仓库到本地代码库"><a href="#拉取远程仓库到本地代码库" class="headerlink" title="拉取远程仓库到本地代码库"></a>拉取远程仓库到本地代码库</h5><p><code>git pull [远程仓库名] [分支名]</code></p>
+<h5 id="提交暂存区到远程仓库"><a href="#提交暂存区到远程仓库" class="headerlink" title="提交暂存区到远程仓库"></a>提交暂存区到远程仓库</h5><p><code>git push [远程仓库名] [分支名]</code></p>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><h5 id="列出所有本地分支"><a href="#列出所有本地分支" class="headerlink" title="列出所有本地分支"></a>列出所有本地分支</h5><p><code>git branch</code></p>
+<h5 id="列出所有远程分支"><a href="#列出所有远程分支" class="headerlink" title="列出所有远程分支"></a>列出所有远程分支</h5><p><code>git branch -r</code></p>
+<h5 id="列出所有本地分支和远程分支"><a href="#列出所有本地分支和远程分支" class="headerlink" title="列出所有本地分支和远程分支"></a>列出所有本地分支和远程分支</h5><p><code>git branch -a</code></p>
+<h5 id="新建一个分支，但依然停留在当前分支"><a href="#新建一个分支，但依然停留在当前分支" class="headerlink" title="新建一个分支，但依然停留在当前分支"></a>新建一个分支，但依然停留在当前分支</h5><p><code>git branch [branch-name]</code></p>
+<h5 id="新建一个分支，并切换到该分支"><a href="#新建一个分支，并切换到该分支" class="headerlink" title="新建一个分支，并切换到该分支"></a>新建一个分支，并切换到该分支</h5><p><code>git checkout -b [branch]</code></p>
+<h5 id="切换到指定分支，并更新工作区"><a href="#切换到指定分支，并更新工作区" class="headerlink" title="切换到指定分支，并更新工作区"></a>切换到指定分支，并更新工作区</h5><p><code>git checkout [branch-name]</code></p>
+<h5 id="切换到上一个分支"><a href="#切换到上一个分支" class="headerlink" title="切换到上一个分支"></a>切换到上一个分支</h5><p><code>git checkout -</code></p>
+<h5 id="新建一个分支，指向指定commit"><a href="#新建一个分支，指向指定commit" class="headerlink" title="新建一个分支，指向指定commit"></a>新建一个分支，指向指定commit</h5><p><code>git branch [branch] [commit]</code></p>
+<h5 id="新建一个分支，与指定的远程分支建立追踪关系"><a href="#新建一个分支，与指定的远程分支建立追踪关系" class="headerlink" title="新建一个分支，与指定的远程分支建立追踪关系"></a>新建一个分支，与指定的远程分支建立追踪关系</h5><p><code>git branch --track [branch] [remote-branch]</code></p>
+<h5 id="合并指定分支到当前分支"><a href="#合并指定分支到当前分支" class="headerlink" title="合并指定分支到当前分支"></a>合并指定分支到当前分支</h5><p><code>git merge [branch]</code></p>
+<h5 id="选择一个commit，合并进当前分支"><a href="#选择一个commit，合并进当前分支" class="headerlink" title="选择一个commit，合并进当前分支"></a>选择一个commit，合并进当前分支</h5><p><code>git cherry-pick [commit]</code></p>
+<h5 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h5><p><code>git branch -d [branch-name]</code></p>
+<h5 id="删除远程分支"><a href="#删除远程分支" class="headerlink" title="删除远程分支"></a>删除远程分支</h5><p><code>git push origin --delete [branch-name]</code><br><code>git branch -dr [remote/branch]</code></p>
+<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><h5 id="显示有变更的文件"><a href="#显示有变更的文件" class="headerlink" title="显示有变更的文件"></a>显示有变更的文件</h5><p><code>git status</code></p>
+<h5 id="显示当前分支的版本历史"><a href="#显示当前分支的版本历史" class="headerlink" title="显示当前分支的版本历史"></a>显示当前分支的版本历史</h5><p><code>git log</code></p>
+<h5 id="显示过去5次提交"><a href="#显示过去5次提交" class="headerlink" title="显示过去5次提交"></a>显示过去5次提交</h5><p><code>git log -5 --pretty --oneline</code></p>
+<h5 id="显示指定文件是什么人在什么时间修改过"><a href="#显示指定文件是什么人在什么时间修改过" class="headerlink" title="显示指定文件是什么人在什么时间修改过"></a>显示指定文件是什么人在什么时间修改过</h5><p><code>git blame [file]</code></p>
+<h4 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h4><h5 id="显示所有远程仓库"><a href="#显示所有远程仓库" class="headerlink" title="显示所有远程仓库"></a>显示所有远程仓库</h5><p><code>git remote -v</code></p>
+<h5 id="增加一个新的远程仓库，并命名"><a href="#增加一个新的远程仓库，并命名" class="headerlink" title="增加一个新的远程仓库，并命名"></a>增加一个新的远程仓库，并命名</h5><p><code>git remote add [远程仓库命名] [远程仓库url]</code></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新：<time datetime="2019-09-17T07:52:59.520Z" itemprop="dateUpdated">2019-09-17 15:52:59</time>
+</span>
+
+
+        
+        原文链接：<a href="/sugarZ/posts/e930fae2/" target="_blank" rel="external">https://cubemmc.github.io/sugarZ/posts/e930fae2/</a>
+        
+    </div>
+    <footer>
+        <div onclick="location.href='https://cubemmc.github.io/sugarZ'">
+            <img src="/sugarZ/img/avatar.jpg" alt="sugarZ">
+            <a>sugarZ</a>
+        </div>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sugarZ/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/sugarZ/tags/语法/">语法</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/sugarZ/posts/a6497cb5/" id="post-prev" class="post-nav-link">
+        <h4 class="title" >
+          上一篇：你不知道的css小知识
+        </h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/sugarZ/posts/97bd5563/" id="post-next" class="post-nav-link">
+        <h4 class="title" data-hover="下一篇：初识Hexo">下一篇：初识Hexo</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+    
+
+    
+
+    
+
+
+</article>
+
+</div>
+
+        <footer class="footer">
+    <div class="footer-content">
+        <span class="power">
+            <i class="icon icon-lg icon-copyright"></i>
+            2019
+            <i class="icon icon-lg icon-heart"></i>
+            <a href="https://cubemmc.github.io/sugarZ">cubemmc.github.io/sugarZ/</a>
+            <!-- <br/>
+            Power by
+            <a href="https://hexo.io/" target="_blank" rel="external nofollow">Hexo</a>&nbsp;·&nbsp;
+            Theme
+            <a class="tomotoeslink" href="https://github.com/tomotoes/hexo-theme-tomotoes/" target="_blank" rel="external nofollow">tomotoes</a> -->
+        </span>
+
+        <br/>
+
+        <span id="RunTime" style="color:#a7a7a2;display:none"></span>
+        <!-- <br/> -->
+
+        <span style="display:none">
+            
+	<i class="icon icon-lg icon-user">
+<span id="busuanzi_container_site_uv" style='display:none'>
+       访问用户：<span id="busuanzi_value_site_uv"></span>
+    </span>人</i>
+    ·
+    <i class="icon icon-lg icon-eye">
+    <span id="busuanzi_container_site_pv" style='display:none'>
+      访问次数：<span id="busuanzi_value_site_pv"></span>
+    </span>次
+    </i>
+
+
+        </span>
+        <br/>
+
+        <span class="license" style="display:none"><a  target="_blank" rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">博客内容遵循 知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+    </div>
+</footer>
+
+    </main>
+    
+        
+
+    
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <!-- waves按钮特效 -->
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<!-- 主题配置脚本 -->
+<script>
+var BLOG = { ROOT: '/sugarZ/', SHARE: false, REWARD: false };
+</script>
+
+<!-- jquery -->
+<script src="/sugarZ/js/jquery.min.js?v=3.0"></script>
+
+<!-- 搜索 -->
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item waves-block waves-effect" onclick="location.href='{path}'">
+    <div class="title ellipsis" title="{title}">{title}</div>
+</li>
+</template>
+
+
+<!-- main博客脚本 -->
+<script src="/sugarZ/js/main.min.js?v=3.0" ></script>
+
+<!-- 动画&配置 -->
+<script src="/sugarZ/js/script.min.js?v=3.0" ></script>
+
+<!-- 脚本管理 -->
+<script>
+
+if(window.innerWidth > 800){
+	/* 3D标题 */
+	$(".content-header").on("mousemove", threedee);
+
+	/* 底部追随鼠标 */
+	$(".footer").hover(2);
+
+	/* gotop键的涟漪 */
+	$("#gotop").hover(1);
+
+	/* 赞赏的粒子雨 */
+	$("#reward").hover(3);
+
+	/* 微信公众号的底部渲染 */
+	$("#wechat").hover(4);
+
+    /* 标题跳动 */
+    $(".archivestitle").bumpyText();
+
+	/* 图片点击放大 */
+	const postimg = jQuery(".post-content img:not(.github-emoji)");
+	postimg.on("click",function(){
+
+		mask.classList.add("in");
+		main.classList.add("Mask");
+		menu.classList.add("Mask");
+		var myimg = this.cloneNode(true);
+		myimg.classList.add("imgShow");
+
+		setTimeout(function(){
+			jQuery(myimg).animate({
+				opacity:"1"
+			},1000);
+		},0);
+
+		document.body.appendChild(myimg);
+
+		myimg.onclick=function(){
+			document.body.removeChild(myimg);
+			mask.classList.remove("in");
+			main.classList.remove("Mask");
+			menu.classList.remove("Mask");
+		};
+
+	});
+
+}
+
+/* 名字跳动 */
+$("#name").bumpyText();
+
+
+/* 网站运行时间 */
+setInterval(function () {
+	setTime("2019/10/11");
+}, 1000);
+
+/* 文章块的淡出 */
+postshow();
+
+/* 座右铭 */
+
+   getHitokoto();
+
+
+
+/* 粘贴提示 */
+G($(".post-content"), location.href, "sugarZ");
+
+
+/* 控制台 */
+if (window.console && window.console.log) {
+	setTimeout(function () {
+		console.log("\n %c sugarZ的博客 %c  © sugarZ  https://cubemmc.github.io/sugarZ/ \n\n", "color:#FFFFFB;background:#1abc9c;padding:5px 0;border-radius:.5rem 0 0 .5rem;", "color:#FFFFFB;background:#080808;padding:5px 0;border-radius:0 .5rem .5rem 0;");
+	}, 0);
+}
+
+</script>
+
+
+
+
+<!-- 公式渲染 -->
+
+
+
+<!-- 不蒜子 -->
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+</body>
+</html>
